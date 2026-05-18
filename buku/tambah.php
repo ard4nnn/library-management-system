@@ -1,3 +1,4 @@
+<?php include '../auth.php'; ?>
 <?php include '../koneksi.php'; 
 
 if (isset($_POST['simpan'])) {
