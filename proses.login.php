@@ -23,29 +23,27 @@ if ($role == 'admin') {
     }
 
 } else {
-
     $query = mysqli_query($koneksi, 
         "SELECT * FROM tabel_anggota 
-         WHERE no_ktp = '$username' AND password = '$password'"
+         WHERE (no_ktp = '$username' OR username = '$username') 
+         AND password = '$password'"
     );
 
-if (mysqli_num_rows($query) > 0) {
-    $data = mysqli_fetch_assoc($query);
-
-    // Cek status akun
-    if ($data['status'] == 'menunggu') {
-        header('Location: login.php?error=menunggu');
-    } elseif ($data['status'] == 'nonaktif') {
-        header('Location: login.php?error=nonaktif');
+    if (mysqli_num_rows($query) > 0) {
+        $data = mysqli_fetch_assoc($query);
+        if ($data['status'] == 'menunggu') {
+            header('Location: login.php?error=menunggu');
+        } elseif ($data['status'] == 'nonaktif') {
+            header('Location: login.php?error=nonaktif');
+        } else {
+            $_SESSION['user']       = $data['nama_lengkap'];
+            $_SESSION['role']       = 'anggota';
+            $_SESSION['id_anggota'] = $data['id_anggota'];
+            header('Location: anggota/dashboard.php');
+        }
     } else {
-        $_SESSION['user']       = $data['nama_lengkap'];
-        $_SESSION['role']       = 'anggota';
-        $_SESSION['id_anggota'] = $data['id_anggota'];
-        header('Location: anggota/dashboard.php');
+        header('Location: login.php?error=1');
     }
-} else {
-    header('Location: login.php?error=1');
-}
 
 }
 exit;

@@ -4,6 +4,7 @@ include 'koneksi.php';
 
 if (isset($_POST['daftar'])) {
     $nama     = $_POST['nama_lengkap'];
+    $username = $_POST['username'];
     $no_ktp   = $_POST['no_ktp'];
     $alamat   = $_POST['alamat'];
     $no_hp    = $_POST['no_hp'];
@@ -21,9 +22,9 @@ if (isset($_POST['daftar'])) {
     }
 
     $query = "INSERT INTO tabel_anggota 
-                (nama_lengkap, no_ktp, alamat, no_hp, email, password, tgl_daftar, status)
+                (nama_lengkap, username, no_ktp, alamat, no_hp, email, password, tgl_daftar, status)
               VALUES 
-                ('$nama', '$no_ktp', '$alamat', '$no_hp', '$email', '$password', '$tgl', 'menunggu')";
+                ('$nama', '$username', '$no_ktp', '$alamat', '$no_hp', '$email', '$password', '$tgl', 'menunggu')";
 
     mysqli_query($koneksi, $query);
     header('Location: login.php?success=register');
@@ -50,6 +51,9 @@ if (isset($_POST['daftar'])) {
     <form method="POST">
         <label>Nama Lengkap</label>
         <input type="text" name="nama_lengkap" required>
+
+        <label>Username</label>
+        <input type="text" name="username" required>
 
         <label>No. KTP</label>
         <input type="text" name="no_ktp" maxlength="16" required>
