@@ -48,7 +48,7 @@ if (isset($_POST['update'])){
         <input type="number" name="tahun_terbit" value="<?= $data['tahun_terbit'] ?>" required>
 
         <label>Stok</label>
-        <input type="number" name="stok" value="<?= $data['stok'] ?>" required>
+        <input type="number" name="stok" value="<?= $data['stok'] ?>" min="0" required>
 
         <button type="submit" name="update">Update</button>
         <a href="index.php">Batal</a>

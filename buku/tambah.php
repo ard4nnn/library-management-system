@@ -36,7 +36,7 @@ $query = "INSERT INTO tabel_buku (judul, pengarang, penerbit, tahun_terbit, stok
         <label>Tahun Terbit :</label>
         <input type="number" name="tahun_terbit" required>
         <label>Stok :</label>
-        <input type="number" name="stok" required>
+        <input type="number" name="stok" min="0" required>
         <button type="submit" name="simpan">Simpan</button>
         <a href="index.php">Batal</a>
     </form>

@@ -40,7 +40,7 @@
                 <td>
                     <a href="edit.php?id=<?= $row['id_buku'] ?>">Edit</a>
                     <a href="hapus.php?id=<?= $row['id_buku'] ?>"
-                    onclick=return confirm('yakin hapus buku ini?')>Hapus</a>
+                       onclick="return confirm('yakin hapus buku ini?')">Hapus</a>
                 </td>
             </tr>
             <?php }
