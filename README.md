@@ -349,6 +349,6 @@ Licensed under the **MIT License** - lihat file [LICENSE](LICENSE) untuk detail.
 
 ---
 
-> **Dibuat dengan ❤️ menggunakan PHP Native & MySQL**
+> **Dibuat dengan menggunakan PHP Native & MySQL**
 > 
 > Last Updated: 2026
