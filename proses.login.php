@@ -2,8 +2,8 @@
 session_start();
 include 'koneksi.php';
 
-$role     = $_POST['role'];
-$username = $_POST['username'];
+$role     = mysqli_real_escape_string($koneksi, $_POST['role']);
+$username = mysqli_real_escape_string($koneksi, $_POST['username']);
 $password = MD5($_POST['password']);
 
 if ($role == 'admin') {

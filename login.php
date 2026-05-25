@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['user'])) {
-    if (isset($_SESSION['role']) == 'admin') {
+    if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
         header('Location: index.php');
     } else {
         header('Location: anggota/dashboard.php');

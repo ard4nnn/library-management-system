@@ -1,15 +1,15 @@
 <?php include '../auth.php'; ?>
 <?php include '../koneksi.php'; 
 
-$id = $_GET['id'];
-$data =mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tabel_buku WHERE id_buku = '$id'"));
+$id = (int)$_GET['id'];
+$data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tabel_buku WHERE id_buku = '$id'"));
 
 if (isset($_POST['update'])){
-    $judul = $_POST['judul'];
-    $pengarang = $_POST['pengarang'];
-    $penerbit = $_POST['penerbit'];
-    $tahun = $_POST['tahun_terbit'];
-    $stok = $_POST['stok'];
+    $judul = mysqli_real_escape_string($koneksi, $_POST['judul']);
+    $pengarang = mysqli_real_escape_string($koneksi, $_POST['pengarang']);
+    $penerbit = mysqli_real_escape_string($koneksi, $_POST['penerbit']);
+    $tahun = (int)$_POST['tahun_terbit'];
+    $stok = (int)$_POST['stok'];
 
     $query = "UPDATE tabel_buku SET
             judul          ='$judul',
@@ -20,6 +20,7 @@ if (isset($_POST['update'])){
             WHERE id_buku  ='$id'"; 
     mysqli_query($koneksi, $query); 
     header("Location: index.php");
+    exit;
 }
 ?>
 

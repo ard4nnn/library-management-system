@@ -2,17 +2,18 @@
 <?php include '../koneksi.php'; 
 
 if (isset($_POST['simpan'])) {
-    $judul = $_POST['judul'];
-    $pengarang = $_POST['pengarang'];
-    $penerbit = $_POST['penerbit'];
-    $tahun = $_POST['tahun_terbit'];
-    $stok = $_POST['stok'];
+    $judul = mysqli_real_escape_string($koneksi, $_POST['judul']);
+    $pengarang = mysqli_real_escape_string($koneksi, $_POST['pengarang']);
+    $penerbit = mysqli_real_escape_string($koneksi, $_POST['penerbit']);
+    $tahun = (int)$_POST['tahun_terbit'];
+    $stok = (int)$_POST['stok'];
 
-$query = "INSERT INTO tabel_buku (judul, pengarang, penerbit, tahun_terbit, stok)
+    $query = "INSERT INTO tabel_buku (judul, pengarang, penerbit, tahun_terbit, stok)
               VALUES ('$judul', '$pengarang', '$penerbit', '$tahun', '$stok')";
     
     mysqli_query($koneksi, $query);    
     header("Location: index.php");
+    exit;
 }
 ?>
 

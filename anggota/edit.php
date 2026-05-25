@@ -1,23 +1,25 @@
 <?php include '../auth.php'; ?>
 <?php include '../koneksi.php';
 
-$id   = $_GET['id'];
+$id   = (int)$_GET['id'];
 $data = mysqli_fetch_assoc(mysqli_query($koneksi, 
     "SELECT * FROM tabel_anggota WHERE id_anggota = $id"
 ));
 
 if (isset($_POST['update'])) {
-    $nama   = $_POST['nama_lengkap'];
-    $no_ktp = $_POST['no_ktp'];
-    $alamat = $_POST['alamat'];
-    $no_hp  = $_POST['no_hp'];
-    $email  = $_POST['email'];
-    $status = $_POST['status'];
+    $nama     = mysqli_real_escape_string($koneksi, $_POST['nama_lengkap']);
+    $username = mysqli_real_escape_string($koneksi, $_POST['username']);
+    $no_ktp   = mysqli_real_escape_string($koneksi, $_POST['no_ktp']);
+    $alamat   = mysqli_real_escape_string($koneksi, $_POST['alamat']);
+    $no_hp    = mysqli_real_escape_string($koneksi, $_POST['no_hp']);
+    $email    = mysqli_real_escape_string($koneksi, $_POST['email']);
+    $status   = mysqli_real_escape_string($koneksi, $_POST['status']);
 
     if (!empty($_POST['password'])) {
         $password = MD5($_POST['password']);
         $query = "UPDATE tabel_anggota SET
                     nama_lengkap = '$nama',
+                    username     = '$username',
                     no_ktp       = '$no_ktp',
                     alamat       = '$alamat',
                     no_hp        = '$no_hp',
@@ -28,6 +30,7 @@ if (isset($_POST['update'])) {
     } else {
         $query = "UPDATE tabel_anggota SET
                     nama_lengkap = '$nama',
+                    username     = '$username',
                     no_ktp       = '$no_ktp',
                     alamat       = '$alamat',
                     no_hp        = '$no_hp',
@@ -58,6 +61,10 @@ if (isset($_POST['update'])) {
         <label>Nama Lengkap</label>
         <input type="text" name="nama_lengkap" 
                value="<?= $data['nama_lengkap'] ?>" required>
+
+        <label>Username</label>
+        <input type="text" name="username" 
+               value="<?= $data['username'] ?>" required>
 
         <label>No. KTP</label>
         <input type="text" name="no_ktp" 
